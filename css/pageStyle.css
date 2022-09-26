@@ -1,0 +1,40 @@
+body {
+    height: 100vh;
+
+    border: solid 5px lightgreen;
+    margin: 0px;
+    padding: 0px;
+
+    background-image: linear-gradient(
+        to bottom,
+      rgb(140, 139, 240),
+      rgba(144, 206, 225, 0.963)
+    );
+     
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+header, main, footer {
+    width: 100%;
+    text-align: center;
+}
+
+header {
+    height: 15%;
+}
+
+main {
+    height: 70%;
+}
+
+footer {
+    height: 15%;
+}
+
+canvas {
+    width: 200px;
+    height: 200px;
+}
