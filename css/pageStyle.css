@@ -69,9 +69,6 @@ main p {
     border-radius: 10px;
 
     margin: 3px;
-
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 10px;
 }
 
 main p:hover,
@@ -84,4 +81,5 @@ main p:active {
     );
     margin: 0px;
     border: solid 3px rgba(36, 10, 115, 0.64);
+    cursor: pointer;
 }
