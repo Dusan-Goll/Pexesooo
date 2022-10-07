@@ -1,12 +1,11 @@
-
-const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
-let playground = document.getElementById('PG');
+/*** GAME PREPARATION ***/
 
 // grid size
-let columnsCount = 8;
-let rowsCount = 5;
+var columnsCount = 4;
+var rowsCount = 4;
+var gridSize = columnsCount * rowsCount
 
-// grid limits
+// grid limits  ??
 if (columnsCount > 8) {
     columnsCount = 8
 }
@@ -14,15 +13,142 @@ if (rowsCount > 5) {
     rowsCount = 5
 }
 
+// pictures supply
+var picturesPaths = [
+    "./images/blackPython.svg",
+    "./images/bluePython.svg",
+    "./images/cyanPython.svg",
+    "./images/greenPython.svg",
+    "./images/orangePython.svg",
+    "./images/pinkPython.svg",
+    "./images/purplePython.svg",
+    "./images/redPython.svg",
+    "./images/whitePython.svg",
+    "./images/yellowPython.svg"
+]
+
+// pictures reduction according grid size
+picturesReduced = picturesPaths.slice(0, gridSize/2);
+
+// twice the values
+function pushTwice(element, array) {
+    array.push(element);
+    array.push(element);
+  };
+var pictures = Array();
+picturesReduced.forEach(path => pushTwice(path, pictures));
+
+// shuffle pictures
+for (let i = pictures.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * i);
+    let temp = pictures[i];
+    pictures[i] = pictures[j];
+    pictures[j] = temp;
+}
+
+// playground
+let playground = document.getElementById('PG');
+
 // grid construction
 playground.style.gridTemplateColumns = `repeat(${columnsCount}, 1fr)`;
 playground.style.gridTemplateRows = `repeat(${rowsCount}, 1fr)`;
 
-// create places for cards with id
+// idFragments
+const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+let ids = [];
+
+// create places for cards with id (i => row, j => column)
 for (let i = 0; i < rowsCount; i++) {
     for (let j = 1; j < (columnsCount + 1); j++) {
-        var vrite = document.write(
-        '<p id=' + letters[i] + j + '></p>'
-        );
+
+        let buttonElem = document.createElement('button');
+        let imgElem = document.createElement('img');
+        buttonElem.setAttribute("id", `${letters[i]}${j}`);
+        buttonElem.setAttribute("onclick", "turnOverCard(this)");
+        imgElem.setAttribute("src", "");
+        imgElem.setAttribute("alt", "");
+
+        buttonElem.appendChild(imgElem);
+        playground.appendChild(buttonElem);
+
+        ids.push(`${letters[i]}${j}`);
+    }
+};
+
+// bind IDs & pictures together
+var cards = {};
+ids.forEach((id, i) => cards[id] = pictures[i]);
+
+
+/*** GAME RUNNING ***/
+var firstCard;
+var secondCard;
+
+function turnOverCard(buttonElement) {
+
+    if (firstCard === undefined) {
+        firstCard = buttonElement;
+        showCardBack(firstCard);
+        disableClick(firstCard);
+    } else if (secondCard === undefined) {
+        secondCard = buttonElement;
+        showCardBack(secondCard);
+        isLastCard() ? enableClick(firstCard) : disableClick(secondCard);
+    } else {
+        comparePictures(firstCard, secondCard);
+    }
+    
+}
+
+function showCardBack(card) {
+    card.firstElementChild.setAttribute("src", cards[card.id]);
+}
+
+function showCardFront(card) {
+    card.firstElementChild.setAttribute("src", "");
+}
+
+function disableClick(card) {
+    card.setAttribute("onclick", "");
+    card.style.cursor = "default";
+}
+
+function enableClick(card) {
+    card.setAttribute("onclick", "turnOverCard(this)");
+    card.style.cursor = "pointer";
+}
+
+function comparePictures(card_1, card_2) {
+    let firstSource = card_1.firstElementChild.getAttribute("src");
+    let secondSource = card_2.firstElementChild.getAttribute("src");
+
+    if (firstSource == secondSource) {
+        deleteCards();
+    } else {
+        resetCards();
+    }
+}
+
+function resetCards() {
+    enableClick(firstCard);
+    enableClick(secondCard);
+    showCardFront(firstCard);
+    showCardFront(secondCard);
+    firstCard = secondCard = undefined;
+}
+
+function deleteCards() {
+    firstCard.outerHTML = "<div class='void'></div>";
+    secondCard.outerHTML = "<div class='void'></div>";
+    firstCard = secondCard = undefined;
+}
+
+function isLastCard() {
+    let buttonCount = playground.getElementsByTagName('button').length;
+
+    if (buttonCount == 2) {
+        return true;
+    } else {
+        return false;
     }
 }
