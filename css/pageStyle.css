@@ -40,8 +40,6 @@ footer {
 
 
 section {
-    width: min-content;
-
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
@@ -54,7 +52,7 @@ section {
     align-items: center;
 }
 
-main p {
+main button {
     height: 80px;
     width: 80px;
     
@@ -67,12 +65,15 @@ main p {
 
     border: solid rgb(49, 49, 107) 1px;
     border-radius: 10px;
-
     margin: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
-main p:hover,
-main p:active {
+main button:hover,
+main button:active {
     background-image: repeating-linear-gradient(
         -45deg,
         rgb(111, 85, 179),
@@ -82,4 +83,9 @@ main p:active {
     margin: 0px;
     border: solid 3px rgba(36, 10, 115, 0.64);
     cursor: pointer;
+}
+
+main img {
+    border-radius: 10px;
+    border: solid 1px darkblue;
 }
