@@ -2,7 +2,7 @@
 
 // grid size
 var columnsCount = 4;
-var rowsCount = 4;
+var rowsCount = 5;
 var gridSize = columnsCount * rowsCount
 
 // grid limits  ??
@@ -93,7 +93,11 @@ function turnOverCard(buttonElement) {
     } else if (secondCard === undefined) {
         secondCard = buttonElement;
         showCardBack(secondCard);
-        isLastCard() ? enableClick(firstCard) : disableClick(secondCard);
+        isLastCard() ? (
+                enableClick(firstCard),
+                hoverShine(firstCard),
+                hoverShine(secondCard)
+            ) : disableClick(secondCard);
     } else {
         comparePictures(firstCard, secondCard);
     }
@@ -101,7 +105,8 @@ function turnOverCard(buttonElement) {
 }
 
 function showCardBack(card) {
-    card.firstElementChild.setAttribute("src", cards[card.id]);
+    let cardImg = card.firstElementChild;
+    cardImg.setAttribute("src", cards[card.id]);
 }
 
 function showCardFront(card) {
@@ -123,9 +128,9 @@ function comparePictures(card_1, card_2) {
     let secondSource = card_2.firstElementChild.getAttribute("src");
 
     if (firstSource == secondSource) {
-        deleteCards();
+        deleteCards();  // cards are the same
     } else {
-        resetCards();
+        resetCards();  // cards are different
     }
 }
 
@@ -151,4 +156,19 @@ function isLastCard() {
     } else {
         return false;
     }
+}
+
+// last two cards shining when hovering
+
+function hoverShine(card) {
+    card.setAttribute("onmouseenter", "bright(this)");
+    card.setAttribute("onmouseleave", "debright(this)");
+}
+
+function bright(hoveredButton) {
+    hoveredButton.setAttribute("style", "filter: brightness(1.5)");
+}
+
+function debright(hoveredButton) {
+    hoveredButton.setAttribute("style", "filter: brightness(1)");
 }

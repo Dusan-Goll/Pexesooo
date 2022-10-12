@@ -63,7 +63,7 @@ main button {
         30px
     );
 
-    border: solid rgb(49, 49, 107) 1px;
+    border: solid rgb(49, 49, 107) 0.5px;
     border-radius: 10px;
     margin: 3px;
     display: flex;
@@ -87,5 +87,4 @@ main button:active {
 
 main img {
     border-radius: 10px;
-    border: solid 1px darkblue;
 }
