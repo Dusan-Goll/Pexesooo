@@ -1,9 +1,9 @@
 /*** GAME PREPARATION ***/
 
 // grid size
-var columnsCount = 4;
-var rowsCount = 5;
-var gridSize = columnsCount * rowsCount
+var columnsCount = 2;
+var rowsCount = 2;
+var gridSize = columnsCount * rowsCount;
 
 // grid limits  ??
 if (columnsCount > 8) {
@@ -25,26 +25,36 @@ var picturesPaths = [
     "./images/redPython.svg",
     "./images/whitePython.svg",
     "./images/yellowPython.svg"
-]
+];
+
+// shuffling
+function shufflePictures(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * i);
+        let temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+    return array;
+}
+
+// first shuffling
+shufflePictures(picturesPaths);
 
 // pictures reduction according grid size
 picturesReduced = picturesPaths.slice(0, gridSize/2);
 
-// twice the values
+// twice the values to make couples
 function pushTwice(element, array) {
     array.push(element);
     array.push(element);
   };
+
 var pictures = Array();
 picturesReduced.forEach(path => pushTwice(path, pictures));
 
-// shuffle pictures
-for (let i = pictures.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * i);
-    let temp = pictures[i];
-    pictures[i] = pictures[j];
-    pictures[j] = temp;
-}
+// second shuffling (whole deck of cards)
+shufflePictures(pictures);
 
 // playground
 let playground = document.getElementById('PG');
