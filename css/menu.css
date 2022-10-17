@@ -30,10 +30,44 @@ nav {
     height: 70%;
     
     display: flex;
+    flex-direction: column;
+
     align-items: center;
     justify-content: center;
 }
 
 footer {
     height: 15%;
+}
+
+nav button {
+    height: 5rem;
+    width: 20rem;
+
+    font-size: 3rem;
+
+    border: solid 0.1rem darkblue;
+    border-radius: 1.2rem;
+    
+    margin-top: 1rem;
+}
+
+#start {
+    background-color: rgba(239, 167, 32, 0.875);
+}
+
+#sett {
+    background-color: rgba(75, 75, 192, 0.903);
+}
+
+#start:hover,
+#start:active {
+    filter: brightness(1.2);
+    cursor: pointer;
+}
+
+#sett:hover,
+#sett:active {
+    filter: brightness(1.4);
+    cursor: pointer;
 }
