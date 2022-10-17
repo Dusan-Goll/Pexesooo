@@ -71,3 +71,8 @@ nav button {
     filter: brightness(1.4);
     cursor: pointer;
 }
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
