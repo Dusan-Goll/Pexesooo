@@ -3,7 +3,7 @@
 
 ~ add README.md
 
-~ add instructions for game  
+~ add instructions for game  (rolling element, like jojo)
 
 ~ game menu & loop  
 
