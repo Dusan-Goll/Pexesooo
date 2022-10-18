@@ -88,3 +88,16 @@ main button:active {
 main img {
     border-radius: 10px;
 }
+
+#back {
+    background-color: rgb(227, 80, 60);
+    background-image: none;
+    margin: 3px;
+}
+
+#back:hover,
+#back:active {
+    filter: brightness(1.4);
+    border: 2px solid rgba(36, 10, 115, 0.64);
+    cursor: pointer;
+}

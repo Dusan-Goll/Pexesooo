@@ -110,8 +110,11 @@ function turnOverCard(buttonElement) {
             ) : disableClick(secondCard);
     } else {
         comparePictures(firstCard, secondCard);
-    }
-    
+    };
+
+    if (isEmptyPlayground()) {
+        endGameView()
+    };
 }
 
 function showCardBack(card) {
@@ -159,13 +162,16 @@ function deleteCards() {
 }
 
 function isLastCard() {
-    let buttonCount = playground.getElementsByTagName('button').length;
-
-    if (buttonCount == 2) {
+    if (getButtonCount() == 2) {
         return true;
     } else {
         return false;
     }
+}
+
+function getButtonCount() {
+    let buttonCount = playground.getElementsByTagName('button').length;
+    return buttonCount
 }
 
 // last two cards shining when hovering
@@ -181,4 +187,37 @@ function bright(hoveredButton) {
 
 function debright(hoveredButton) {
     hoveredButton.setAttribute("style", "filter: brightness(1)");
+}
+
+function isEmptyPlayground() {
+    if (getButtonCount() == 0) {
+        return true
+    } else {
+        return false
+    };
+};
+
+
+/*** GAME END ***/
+function endGameView() {
+    removeSectionEl();
+    addExitButton();
+};
+
+function removeSectionEl() {
+    let section = document.querySelector("section");
+    section.remove();
+}
+
+function addExitButton() {
+    let exitButton = document.createElement("button"),
+        exitAnchor = document.createElement("a"),
+        navElem    = document.createElement("nav"),
+        mainElem   = document.querySelector("main");
+    exitAnchor.textContent = "back to menu";
+    exitAnchor.setAttribute("href", "./menu.html");
+    exitButton.setAttribute("id", "back");
+    exitButton.appendChild(exitAnchor);
+    navElem.appendChild(exitButton);
+    mainElem.appendChild(navElem);
 }
