@@ -73,7 +73,10 @@ nav button {
     border-radius: 1.2rem;
     margin-top: 1rem;
 
-    font-size: 3rem;
+    font-size: 1.8rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.2rem;
 }
 
 nav a {
