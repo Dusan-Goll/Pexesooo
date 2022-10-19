@@ -1,50 +1,9 @@
-body {
-    height: 100vh;
-
-    border: solid 5px lightgreen;
-    margin: 0px;
-    padding: 0px;
-
-    background-image: linear-gradient(
-        to bottom,
-      rgb(140, 139, 240),
-      rgba(144, 206, 225, 0.963)
-    );
-     
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-header, main, footer {
-    width: 100%;
-    text-align: center;
-}
-
-header {
-    height: 15%;
-}
-
-main {
-    height: 70%;
-    
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-footer {
-    height: 15%;
-}
-
-
+/* playground */
 section {
     display: grid;
 
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 1fr);
-
     column-gap: 20px;
     row-gap: 20px;
 
@@ -52,10 +11,15 @@ section {
     align-items: center;
 }
 
-main button {
+/* cards */
+section button {
     height: 80px;
     width: 80px;
     
+    border: solid rgb(49, 49, 107) 0.5px;
+    border-radius: 10px;
+    margin: 3px;
+
     background-image: repeating-linear-gradient(
         -45deg,
         rgb(69, 29, 169),
@@ -63,36 +27,38 @@ main button {
         30px
     );
 
-    border: solid rgb(49, 49, 107) 0.5px;
-    border-radius: 10px;
-    margin: 3px;
     display: flex;
     justify-content: center;
     align-items: center;
-
 }
 
-main button:hover,
-main button:active {
+section button:hover,
+section button:active {
+    border: solid 3px rgba(36, 10, 115, 0.64);
+    margin: 0px;
+
     background-image: repeating-linear-gradient(
         -45deg,
         rgb(111, 85, 179),
         rgb(214, 180, 99)
         30px
     );
-    margin: 0px;
-    border: solid 3px rgba(36, 10, 115, 0.64);
+    
     cursor: pointer;
 }
 
-main img {
+section img {
     border-radius: 10px;
 }
 
+/* 'back to menu' button */
 #back {
     background-color: rgb(227, 80, 60);
     background-image: none;
+
     margin: 3px;
+
+    font-size: 2.5rem;
 }
 
 #back:hover,

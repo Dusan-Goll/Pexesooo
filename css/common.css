@@ -1,0 +1,54 @@
+body {
+    height: 100vh;
+
+    border: solid 5px lightgreen;
+    margin: 0px;
+    padding: 0px;
+
+    background-image: linear-gradient(
+        to bottom,
+      rgb(140, 139, 240),
+      rgba(144, 206, 225, 0.963)
+    );
+     
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* structure */
+header, main, nav, footer {
+    width: 100%;
+    text-align: center;
+}
+
+header, footer {
+    height: 15%;
+}
+
+main, nav {
+    height: 70%;
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* nav buttons & anchors */
+nav button {
+    height: 5rem;
+    width: 20rem;
+    
+    border: solid 0.1rem darkblue;
+    border-radius: 1.2rem;
+    margin-top: 1rem;
+
+    font-size: 3rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+}
