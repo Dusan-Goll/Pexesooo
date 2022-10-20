@@ -1,7 +1,5 @@
 body {
     height: 100vh;
-
-    border: solid 5px lightgreen;
     margin: 0px;
     padding: 0px;
 
@@ -10,14 +8,17 @@ body {
       rgb(140, 139, 240),
       rgba(144, 206, 225, 0.963)
     );
-     
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* body structure */
+body, main, nav, header, nav a {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 main, nav, footer {
     width: 100%;
     text-align: center;
@@ -25,11 +26,6 @@ main, nav, footer {
 
 main, nav {
     height: 70%;
-    
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 footer {
@@ -38,23 +34,18 @@ footer {
 
 /* header */
 header {
-    align-self: stretch;
     height: 20%;
+    align-self: stretch;
     background-color: rgb(141, 125, 180);
 
     margin: 1rem;
     border: 0.1rem solid darkblue;
     border-radius: 1rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 header h1 {
     color: darkblue;
     font-size: 4rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: 200;
 
     letter-spacing: 1rem;
@@ -65,7 +56,7 @@ header h1 {
 }
 
 /* nav buttons & anchors */
-nav button {
+nav a {
     height: 5rem;
     width: 20rem;
     
@@ -74,12 +65,8 @@ nav button {
     margin-top: 1rem;
 
     font-size: 1.8rem;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     text-transform: uppercase;
-    letter-spacing: 0.2rem;
-}
-
-nav a {
+    letter-spacing: 0.3rem;
     text-decoration: none;
     color: black;
 }

@@ -72,7 +72,7 @@ for (let i = 0; i < rowsCount; i++) {
     for (let j = 1; j < (columnsCount + 1); j++) {
 
         let buttonElem = document.createElement('button');
-        let imgElem = document.createElement('img');
+        let imgElem    = document.createElement('img');
         buttonElem.setAttribute("id", `${letters[i]}${j}`);
         buttonElem.setAttribute("onclick", "turnOverCard(this)");
         imgElem.setAttribute("src", "");
@@ -137,7 +137,7 @@ function enableClick(card) {
 }
 
 function comparePictures(card_1, card_2) {
-    let firstSource = card_1.firstElementChild.getAttribute("src");
+    let firstSource  = card_1.firstElementChild.getAttribute("src");
     let secondSource = card_2.firstElementChild.getAttribute("src");
 
     if (firstSource == secondSource) {
@@ -210,14 +210,12 @@ function removeSectionEl() {
 }
 
 function addExitButton() {
-    let exitButton = document.createElement("button"),
-        exitAnchor = document.createElement("a"),
+    let exitAnchor = document.createElement("a"),
         navElem    = document.createElement("nav"),
         mainElem   = document.querySelector("main");
     exitAnchor.textContent = "back to menu";
     exitAnchor.setAttribute("href", "./menu.html");
-    exitButton.setAttribute("id", "back");
-    exitButton.appendChild(exitAnchor);
-    navElem.appendChild(exitButton);
+    exitAnchor.setAttribute("id", "back");
+    navElem.appendChild(exitAnchor);
     mainElem.appendChild(navElem);
 }
