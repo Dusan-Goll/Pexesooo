@@ -51,7 +51,7 @@ section img {
     border-radius: 10px;
 }
 
-/* 'back to menu' button */
+/* 'back to menu' anchor */
 #back {
     background-color: rgb(227, 80, 60);
     background-image: none;
