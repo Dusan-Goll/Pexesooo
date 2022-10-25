@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="cz">
+    
+  <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport"
+            content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="./css/common.css">
+      <link rel="stylesheet" href="./css/menu.css">
+      <link rel="stylesheet" href="./css/settings.css">
+
+      <title>Pexesooo - game size</title>
+  </head>
+  
+  <body>
+      <header>
+        <h1>Pexesooo</h1>
+      </header>
+
+      <main>
+
+        <h2>Game size</h2>
+
+        <nav>
+          <button class="size" id="S">
+            <svg>
+                <circle cx="16" cy="16" r="10" fill="black"></circle>
+                <circle cx="16" cy="16" r="8" fill="var(--color-small)"></circle>
+            </svg>
+            <p>small</p>
+          </button>
+
+          <button class="size" id="M">
+            <svg>
+              <circle cx="16" cy="16" r="10" fill="black"></circle>
+              <circle cx="16" cy="16" r="8" fill="var(--color-medium)"></circle>
+            </svg>
+            <p>medium</p>
+          </button>
+                
+          <button class="size" id="L">
+            <svg>
+              <circle cx="16" cy="16" r="10" fill="black"></circle>
+              <circle cx="16" cy="16" r="8" fill="var(--color-large)"></circle>
+            </svg>
+            <p>large</p>
+          </button>
+        
+          <a href="./settings.html" id="back">back</a>
+        </nav>
+
+      </main>
+
+      <footer>
+        <p>Pexesooo by DuGo</p>
+      </footer>
+  </body>
+
+  <script src="lodash.min.js"></script>
+  <script src="setSize.js"></script>
+
+</html>

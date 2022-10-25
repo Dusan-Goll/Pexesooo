@@ -1,5 +1,7 @@
 /*** GAME PREPARATION ***/
 
+// import { gameSize } from './setSize.js'
+
 // grid size
 var columnsCount = 2;
 var rowsCount = 2;
