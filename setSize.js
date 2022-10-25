@@ -1,31 +1,47 @@
 // check current setting in Local Storage 
-var gSize = localStorage.getItem("sizeClass");
+var gSize = getSizeClass();
 
 if ( ! gSize ) {
     gSize = "medium";
+    localStorage.setItem("sizeClass", gSize);
 }
 
-localStorage.setItem("sizeClass", gSize);
+function getSizeClass() {
+    return localStorage.getItem("sizeClass");
+}
 
 // buttons variables
-var sizeButtonsList  = document.getElementsByClassName("size"),
+var sizeButtonsList = document.getElementsByClassName("size"),
+    sizeButtons = Array.prototype.slice.call(sizeButtonsList);
+
     smallButton  = sizeButtonsList[0],
     mediumButton = sizeButtonsList[1],
     largeButton  = sizeButtonsList[2];
 
-// default setting to MEDIUM
-switchTo(mediumButton);
+// actual size setting
+let actualButton = getActualButton();
+switchTo(actualButton);
+
+function getActualButton() {
+    for (const sizeButton of sizeButtons) {
+        let iterName = getSizeNameOf(sizeButton);
+
+        if (iterName === getSizeClass()) {
+            return sizeButton;
+        }
+    };
+}
 
 // switching buttons
-var sizeButtons = Array.prototype.slice.call(sizeButtonsList);
-
 sizeButtons.forEach(sizeButton => {
     sizeButton.addEventListener("click", function() {
         switchTo(sizeButton);
+        localStorage.setItem("sizeClass", getSizeNameOf(sizeButton));
+
         let otherButtons = _.without(sizeButtons, sizeButton);
 
         otherButtons.forEach(otherButton => {
-            let sizeName = otherButton.lastElementChild.textContent;
+            let sizeName = getSizeNameOf(otherButton);
             switchOff(otherButton, sizeName);
         });
     })
@@ -42,6 +58,10 @@ function switchOff(thisButton, colorName) {
 function getInnerCircle(_thisButton) {
     let svgElem = _thisButton.firstElementChild;
     return svgElem.firstElementChild.nextElementSibling;
+}
+
+function getSizeNameOf(thisButton) {
+    return thisButton.lastElementChild.textContent;
 }
 
 
