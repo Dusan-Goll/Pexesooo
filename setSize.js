@@ -14,10 +14,6 @@ function getSizeClass() {
 var sizeButtonsList = document.getElementsByClassName("size"),
     sizeButtons = Array.prototype.slice.call(sizeButtonsList);
 
-    smallButton  = sizeButtonsList[0],
-    mediumButton = sizeButtonsList[1],
-    largeButton  = sizeButtonsList[2];
-
 // actual size setting
 let actualButton = getActualButton();
 switchTo(actualButton);
@@ -63,9 +59,3 @@ function getInnerCircle(_thisButton) {
 function getSizeNameOf(thisButton) {
     return thisButton.lastElementChild.textContent;
 }
-
-
-
-// have a REST, take a BREAK,
-// happiness & sense of acceptance of your childern
-// is one of the highest priority
