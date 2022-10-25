@@ -121,7 +121,7 @@ function addExitButton() {
         navElem    = document.createElement("nav"),
         mainElem   = document.querySelector("main");
     exitAnchor.textContent = "back to menu";
-    exitAnchor.setAttribute("href", "./menu.html");
+    exitAnchor.setAttribute("href", "./index.html");
     exitAnchor.setAttribute("id", "back");
     navElem.appendChild(exitAnchor);
     mainElem.appendChild(navElem);
