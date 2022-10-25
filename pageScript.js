@@ -1,19 +1,21 @@
 /*** GAME PREPARATION ***/
 
-// import { gameSize } from './setSize.js'
+// get actual setting of game size
+var sizeSetting = localStorage.getItem("sizeClass");
 
 // grid size
-var columnsCount = 2;
-var rowsCount = 2;
-var gridSize = columnsCount * rowsCount;
+if (sizeSetting === "small") {
+    var columnsCount = 2,
+        rowsCount    = 2;
+} else if (sizeSetting === "medium") {
+    var columnsCount = 4,
+        rowsCount    = 3;
+} else if (sizeSetting === "large") {
+    var columnsCount = 5,
+        rowsCount    = 4;
+}
 
-// grid limits  ??
-if (columnsCount > 8) {
-    columnsCount = 8
-}
-if (rowsCount > 5) {
-    rowsCount = 5
-}
+var gridSize = columnsCount * rowsCount;
 
 // pictures supply
 var picturesPaths = [
