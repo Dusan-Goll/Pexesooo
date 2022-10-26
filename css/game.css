@@ -1,4 +1,12 @@
 /* playground */
+main {
+    flex-direction: row;
+}
+
+#desk {
+    width: 85%;
+}
+
 section {
     display: grid;
 
@@ -10,6 +18,54 @@ section {
     justify-items: center;
     align-items: center;
 }
+
+/* score tab */
+aside {
+    background-color: rgba(106, 105, 160, 0.519);
+    align-self: stretch;
+    width: 15%;
+    margin-left: 1rem;
+    border-radius: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+aside div {
+    background-color: rgb(135, 96, 171);
+    border-radius: 0.5rem;
+    min-height: 6rem;
+    margin: 1rem;
+}
+
+aside h3 {
+    font-family: inherit;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: rgb(9, 9, 87);
+}
+
+aside p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+}
+
+#found p {
+    color: rgb(226, 214, 165);
+}
+
+#attempts p {
+    color: black;
+}
+
+#score p {
+    color: yellow;
+    font-size: 3rem;
+}
+
 
 /* cards */
 section button {

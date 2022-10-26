@@ -119,10 +119,10 @@ function removeSectionEl() {
 function addExitButton() {
     let exitAnchor = document.createElement("a"),
         navElem    = document.createElement("nav"),
-        mainElem   = document.querySelector("main");
+        desk       = document.getElementById("desk");
     exitAnchor.textContent = "back to menu";
     exitAnchor.setAttribute("href", "./index.html");
     exitAnchor.setAttribute("id", "back");
     navElem.appendChild(exitAnchor);
-    mainElem.appendChild(navElem);
+    desk.appendChild(navElem);
 }

@@ -12,7 +12,7 @@ body {
 }
 
 /* body structure */
-body, main, nav, header, nav a {
+body, main, nav, header, nav a, #desk {
     display: flex;
     flex-direction: column;
     justify-content: center;
