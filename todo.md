@@ -9,7 +9,7 @@
 
 ~ ~~game options (f.e.: changeable size of grid - S, M, L)~~  
 
-~ add score (elapsed time, attempt count)
+~ ~~add score (attempt count)~~
 
 ~ fix bug with zooming - section is zooming
 different as the triple (header, body, footer)
