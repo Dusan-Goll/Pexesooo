@@ -1,5 +1,6 @@
-var firstCard;
-var secondCard;
+var firstCard,
+    secondCard,
+    lastAttempt = false;
 
 function turnOverCard(buttonElement) {
 
@@ -47,10 +48,20 @@ function comparePictures(card_1, card_2) {
     let firstSource  = card_1.firstElementChild.getAttribute("src");
     let secondSource = card_2.firstElementChild.getAttribute("src");
 
-    if (firstSource == secondSource) {
-        deleteCards();  // cards are the same
-    } else {
-        resetCards();  // cards are different
+    if (firstSource == secondSource) {  // cards are the same
+        deleteCards();
+
+        if (lastAttempt) {
+            increaseScoreBy(2);
+        } else {
+            increaseScoreBy(1);
+        }
+        lastAttempt = true;
+    } else {  // cards are different
+        resetCards();
+
+        increaseScoreBy(0);
+        lastAttempt = false;
     }
 }
 
@@ -73,6 +84,26 @@ function isLastCard() {
         return true;
     } else {
         return false;
+    }
+}
+
+function increaseScoreBy(increment) {
+    let attemElem = document.getElementById("attem").lastElementChild,
+        attemNum  = Number(attemElem.textContent);
+    
+    attemNum += 1;
+    attemElem.textContent = attemNum;
+    
+    if (increment > 0) {
+        let foundElem = document.getElementById("found").lastElementChild,
+            scoreElem = document.getElementById("score").lastElementChild,
+            foundNum  = Number(foundElem.textContent),
+            scoreNum  = Number(scoreElem.textContent);
+    
+    foundNum += 1;
+    scoreNum += increment;
+    foundElem.textContent = foundNum;
+    scoreElem.textContent = scoreNum;
     }
 }
 
