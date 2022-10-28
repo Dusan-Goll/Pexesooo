@@ -5,11 +5,37 @@
     --color-switchedOn: #7bfc03;
 }
 
-.size svg {
-    height: 30px;
-    width: 30px;
+/*** SETTINGS page ***/
+/* 'back' anchor */
+#back {
+    min-height: 5rem;
+    min-width: 20rem;
+
+    background-color: rgb(227, 80, 60);
+    background-image: none;
+
+    margin-top: 1rem;
 }
 
+#back:hover,
+#back:active {
+    filter: brightness(1.4);
+    cursor: pointer;
+}
+
+/* 'game size' anchor */
+#gSize {
+    background-color: rgb(26, 211, 118);
+}
+
+#gSize:hover,
+#gSize:active {
+    filter: brightness(1.4);
+    cursor: pointer;
+}
+
+
+/*** GAME SIZE SETTINGS page ***/
 /* buttons */
 .size {
     height: 3rem;
@@ -29,6 +55,11 @@
     justify-content: flex-start;
     column-gap: 1.6rem;
     align-items: center;
+}
+
+.size svg {
+    height: 30px;
+    width: 30px;
 }
 
 #S {
@@ -58,33 +89,5 @@
 #L:hover,
 #L:active {
     filter: brightness(1.2);
-    cursor: pointer;
-}
-
-/* 'back' anchor */
-#back {
-    min-height: 5rem;
-    min-width: 20rem;
-
-    background-color: rgb(227, 80, 60);
-    background-image: none;
-
-    margin-top: 2rem;
-}
-
-#back:hover,
-#back:active {
-    filter: brightness(1.4);
-    cursor: pointer;
-}
-
-/* 'game size' anchor */
-#gSize {
-    background-color: rgb(26, 211, 118);
-}
-
-#gSize:hover,
-#gSize:active {
-    filter: brightness(1.4);
     cursor: pointer;
 }
