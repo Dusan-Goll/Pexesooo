@@ -1,22 +1,28 @@
+// global variables
 var firstCard,
     secondCard,
     lastAttempt = false;
 
+// turning over cards
 function turnOverCard(buttonElement) {
 
-    if (firstCard === undefined) {
+    if (firstCard === undefined) {  // (unturned)
         firstCard = buttonElement;
         showCardBack(firstCard);
         disableClick(firstCard);
-    } else if (secondCard === undefined) {
+
+    } else if (secondCard === undefined) {  // (unturned)
         secondCard = buttonElement;
         showCardBack(secondCard);
-        isLastCard() ? (
-                enableClick(firstCard),
-                hoverShine(firstCard),
-                hoverShine(secondCard)
-            ) : disableClick(secondCard);
-    } else {
+        enableClick(firstCard);
+        hoverShine(firstCard);
+        hoverShine(secondCard);
+
+        otherCards().forEach(anotherCard => {
+            disableClick(anotherCard);
+        });
+
+    } else {  // both cards turned
         comparePictures(firstCard, secondCard);
     };
 
@@ -37,13 +43,24 @@ function showCardFront(card) {
 function disableClick(card) {
     card.setAttribute("onclick", "");
     card.style.cursor = "default";
+    card.style.setProperty("--card-brightness", "1");
+    card.style.setProperty("--card-cursor", "default");
 }
 
 function enableClick(card) {
     card.setAttribute("onclick", "turnOverCard(this)");
     card.style.cursor = "pointer";
+    card.style.setProperty('--card-brightness', "1.3");
+    card.style.setProperty("--card-cursor", "pointer");
 }
 
+function otherCards() {  // returns array of all cards except both turned
+    let allCards = playground.children;
+    allCardsArray = Array.prototype.slice.call(allCards);
+    return _.pull(allCardsArray, firstCard, secondCard);
+}
+
+// handling attempt result
 function comparePictures(card_1, card_2) {
     let firstSource  = card_1.firstElementChild.getAttribute("src");
     let secondSource = card_2.firstElementChild.getAttribute("src");
@@ -51,7 +68,7 @@ function comparePictures(card_1, card_2) {
     if (firstSource == secondSource) {  // cards are the same
         deleteCards();
 
-        if (lastAttempt) {
+        if (lastAttempt) {  // player guessed previous pair
             increaseScoreBy(2);
         } else {
             increaseScoreBy(1);
@@ -63,30 +80,47 @@ function comparePictures(card_1, card_2) {
         increaseScoreBy(0);
         lastAttempt = false;
     }
+
+    otherCards().forEach(anotherCard => {
+        enableClick(anotherCard);
+    });
+
+    firstCard = secondCard = undefined;
 }
 
 function resetCards() {
-    enableClick(firstCard);
-    enableClick(secondCard);
     showCardFront(firstCard);
     showCardFront(secondCard);
-    firstCard = secondCard = undefined;
+    deactivateHoverShine(firstCard);
+    deactivateHoverShine(secondCard);
 }
 
 function deleteCards() {
     firstCard.outerHTML = "<div class='void'></div>";
     secondCard.outerHTML = "<div class='void'></div>";
-    firstCard = secondCard = undefined;
 }
 
-function isLastCard() {
-    if (getButtonCount() == 2) {
-        return true;
-    } else {
-        return false;
-    }
+// the two turned cards shining when hovering
+function hoverShine(card) {
+    card.setAttribute("onmouseover", "bright(this)");
+    card.setAttribute("onmouseleave", "debright(this)");
 }
 
+function deactivateHoverShine(card) {
+    card.removeAttribute("onmouseover");
+    card.removeAttribute("onmouseleave");
+    card.removeAttribute("style");
+}
+
+function bright(hoveredButton) {
+    hoveredButton.setAttribute("style", "filter: brightness(1.25)");
+}
+
+function debright(hoveredButton) {
+    hoveredButton.setAttribute("style", "filter: brightness(1)");
+}
+
+// score handling
 function increaseScoreBy(increment) {
     let attemElem = document.getElementById("attem").lastElementChild,
         attemNum  = Number(attemElem.textContent);
@@ -107,26 +141,7 @@ function increaseScoreBy(increment) {
     }
 }
 
-function getButtonCount() {
-    let buttonCount = playground.getElementsByTagName('button').length;
-    return buttonCount
-}
-
-// last two cards shining when hovering
-
-function hoverShine(card) {
-    card.setAttribute("onmouseenter", "bright(this)");
-    card.setAttribute("onmouseleave", "debright(this)");
-}
-
-function bright(hoveredButton) {
-    hoveredButton.setAttribute("style", "filter: brightness(1.5)");
-}
-
-function debright(hoveredButton) {
-    hoveredButton.setAttribute("style", "filter: brightness(1)");
-}
-
+// check if there are any cards
 function isEmptyPlayground() {
     if (getButtonCount() == 0) {
         return true
@@ -134,6 +149,11 @@ function isEmptyPlayground() {
         return false
     };
 };
+
+function getButtonCount() {
+    let buttonCount = playground.getElementsByTagName('button').length;
+    return buttonCount
+}
 
 
 /*** GAME END ***/

@@ -3,8 +3,6 @@
 
 ~ add README.md
 
-~ add instructions for game  (rolling element, like jojo)
-
 ~ ~~game menu & loop~~  
 
 ~ ~~game options (f.e.: changeable size of grid - S, M, L)~~  
