@@ -1,10 +1,5 @@
 // get actual setting of game size
-var sizeSetting = localStorage.getItem("sizeClass");
-
-if ( ! sizeSetting ) {
-    sizeSetting = "medium";
-    localStorage.setItem("sizeClass", sizeSetting);
-}
+var sizeSetting = localStorage.getItem("sizeClass") || "medium";
 
 // grid size
 if (sizeSetting === "small") {
