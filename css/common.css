@@ -25,7 +25,7 @@ main, nav, footer {
 }
 
 main, nav {
-    height: 70%;
+    height: 73%;
 }
 
 footer {
@@ -34,7 +34,7 @@ footer {
 
 /* header */
 header {
-    height: 20%;
+    height: 17%;
     align-self: stretch;
     background-color: rgb(141, 125, 180);
 

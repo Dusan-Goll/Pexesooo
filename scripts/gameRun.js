@@ -1,7 +1,14 @@
 // global variables
 var firstCard,
     secondCard,
-    lastAttempt = false;
+    colors  = ["Blue", "Red", "Green", "Yellow"],
+    players = colors.slice(0, numberOfPlayers)
+    desk    = document.getElementById("desk");
+
+// who's on turn
+function actualPlayer() {
+    return players[0];
+}
 
 // turning over cards
 function turnOverCard(buttonElement) {
@@ -31,6 +38,7 @@ function turnOverCard(buttonElement) {
     };
 }
 
+// showing card back/front & disabling/enabling click
 function showCardBack(card) {
     let cardImg = card.firstElementChild;
     cardImg.setAttribute("src", cards[card.id]);
@@ -54,7 +62,8 @@ function enableClick(card) {
     card.style.setProperty("--card-cursor", "pointer");
 }
 
-function otherCards() {  // returns array of all cards except both turned
+// all cards except both currently turned
+function otherCards() {
     let allCards = playground.children;
     allCardsArray = Array.prototype.slice.call(allCards);
     return _.pull(allCardsArray, firstCard, secondCard);
@@ -67,18 +76,11 @@ function comparePictures(card_1, card_2) {
 
     if (firstSource == secondSource) {  // cards are the same
         deleteCards();
+        increaseScore(actualPlayer());
 
-        if (lastAttempt) {  // player guessed previous pair
-            increaseScoreBy(2);
-        } else {
-            increaseScoreBy(1);
-        }
-        lastAttempt = true;
     } else {  // cards are different
         resetCards();
-
-        increaseScoreBy(0);
-        lastAttempt = false;
+        nextPlayer();
     }
 
     otherCards().forEach(anotherCard => {
@@ -88,6 +90,11 @@ function comparePictures(card_1, card_2) {
     firstCard = secondCard = undefined;
 }
 
+function deleteCards() {
+    firstCard.outerHTML = "<div class='void'></div>";
+    secondCard.outerHTML = "<div class='void'></div>";
+}
+
 function resetCards() {
     showCardFront(firstCard);
     showCardFront(secondCard);
@@ -95,9 +102,15 @@ function resetCards() {
     deactivateHoverShine(secondCard);
 }
 
-function deleteCards() {
-    firstCard.outerHTML = "<div class='void'></div>";
-    secondCard.outerHTML = "<div class='void'></div>";
+// switching player and scoreboxes
+function nextPlayer() {
+    players.push(players.shift());
+    switchTo(actualPlayer());
+}
+
+function switchTo(player) {
+    let scoreBarCSSLink = document.getElementById("scoreBarCSS");
+    scoreBarCSSLink.setAttribute("href", `./css/highlight${player}.css`);
 }
 
 // the two turned cards shining when hovering
@@ -121,24 +134,11 @@ function debright(hoveredButton) {
 }
 
 // score handling
-function increaseScoreBy(increment) {
-    let attemElem = document.getElementById("attem").lastElementChild,
-        attemNum  = Number(attemElem.textContent);
-    
-    attemNum += 1;
-    attemElem.textContent = attemNum;
-    
-    if (increment > 0) {
-        let foundElem = document.getElementById("found").lastElementChild,
-            scoreElem = document.getElementById("score").lastElementChild,
-            foundNum  = Number(foundElem.textContent),
-            scoreNum  = Number(scoreElem.textContent);
-    
-    foundNum += 1;
-    scoreNum += increment;
-    foundElem.textContent = foundNum;
+function increaseScore(player) {
+    let scoreElem = document.getElementById(player).lastElementChild,
+        scoreNum  = Number(scoreElem.textContent);
+    scoreNum += 1;
     scoreElem.textContent = scoreNum;
-    }
 }
 
 // check if there are any cards
@@ -153,27 +153,4 @@ function isEmptyPlayground() {
 function getButtonCount() {
     let buttonCount = playground.getElementsByTagName('button').length;
     return buttonCount
-}
-
-
-/*** GAME END ***/
-function endGameView() {
-    removeSectionEl();
-    addExitButton();
-};
-
-function removeSectionEl() {
-    let section = document.querySelector("section");
-    section.remove();
-}
-
-function addExitButton() {
-    let exitAnchor = document.createElement("a"),
-        navElem    = document.createElement("nav"),
-        desk       = document.getElementById("desk");
-    exitAnchor.textContent = "back to menu";
-    exitAnchor.setAttribute("href", "./index.html");
-    exitAnchor.setAttribute("id", "back");
-    navElem.appendChild(exitAnchor);
-    desk.appendChild(navElem);
 }

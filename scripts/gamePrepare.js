@@ -1,32 +1,51 @@
 // get actual setting of game size
 var sizeSetting = localStorage.getItem("sizeClass") || "medium";
 
+// scoreBoxes Yellow & Green
+var yellowScoreBox = document.getElementById("Yellow"),
+greenScoreBox  = document.getElementById("Green");
+
+// number of players
+var numberOfPlayers = Number(localStorage.getItem("numOfPlayers")) || 2;
+
+if (numberOfPlayers == 2) {
+    yellowScoreBox.remove();
+    greenScoreBox.remove();
+} else if (numberOfPlayers == 3) {
+    yellowScoreBox.remove();
+}
+
 // grid size
 if (sizeSetting === "small") {
-    var columnsCount = 2,
-        rowsCount    = 2;
-} else if (sizeSetting === "medium") {
     var columnsCount = 4,
         rowsCount    = 3;
-} else if (sizeSetting === "large") {
+} else if (sizeSetting === "medium") {
     var columnsCount = 5,
         rowsCount    = 4;
+} else if (sizeSetting === "large") {
+    var columnsCount = 6,
+        rowsCount    = 5;
 }
 
 var gridSize = columnsCount * rowsCount;
 
 // pictures supply
 var picturesPaths = [
-    "./images/blackPython.svg",
-    "./images/bluePython.svg",
-    "./images/cyanPython.svg",
-    "./images/greenPython.svg",
-    "./images/orangePython.svg",
-    "./images/pinkPython.svg",
-    "./images/purplePython.svg",
-    "./images/redPython.svg",
-    "./images/whitePython.svg",
-    "./images/yellowPython.svg"
+    "./images/pythonLogo.svg",
+    "./images/jsLogo.svg",
+    "./images/htmlLogo.svg",
+    "./images/cssLogo.svg",
+    "./images/svgLogo.svg",
+    "./images/gitLogo.svg",
+    "./images/githubLogo.svg",
+    "./images/vscodeLogo.svg",
+    "./images/pycharmLogo.svg",
+    "./images/lodashLogo.svg",
+    "./images/mdnLogo.svg",
+    "./images/googleLogo.svg",
+    "./images/chromeLogo.svg",
+    "./images/stackoverflowLogo.svg",
+    "./images/gfgLogo.svg"
 ];
 
 // shuffling
