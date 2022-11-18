@@ -10,8 +10,9 @@
       <link rel="stylesheet" href="./css/common.css">
       <link rel="stylesheet" href="./css/menu.css">
       <link rel="stylesheet" href="./css/settings.css">
+      <link id="playersCountCSS" rel="stylesheet" href>
 
-      <title>Pexesooo - game size</title>
+      <title>Pexesooo - number of players</title>
   </head>
   
   <body>
@@ -20,31 +21,31 @@
       </header>
 
       <main>
-        <h2>Game size</h2>
+        <h2>Number of players</h2>
 
         <nav>
-          <button class="size" id="S">
+          <button class="numPlayers" id="count2">
             <svg>
                 <circle cx="16" cy="16" r="10" fill="black"></circle>
-                <circle cx="16" cy="16" r="8" fill="var(--color-small)"></circle>
+                <circle id="inner2" cx="16" cy="16" r="8" fill="var(--color-two)"></circle>
             </svg>
-            <p>small</p>
+            <p>2 players</p>
           </button>
 
-          <button class="size" id="M">
+          <button class="numPlayers" id="count3">
             <svg>
               <circle cx="16" cy="16" r="10" fill="black"></circle>
-              <circle cx="16" cy="16" r="8" fill="var(--color-medium)"></circle>
+              <circle id="inner3" cx="16" cy="16" r="8" fill="var(--color-three)"></circle>
             </svg>
-            <p>medium</p>
+            <p>3 players</p>
           </button>
                 
-          <button class="size" id="L">
+          <button class="numPlayers" id="count4">
             <svg>
               <circle cx="16" cy="16" r="10" fill="black"></circle>
-              <circle cx="16" cy="16" r="8" fill="var(--color-large)"></circle>
+              <circle id="inner4" cx="16" cy="16" r="8" fill="var(--color-four)"></circle>
             </svg>
-            <p>large</p>
+            <p>4 players</p>
           </button>
         
           <a href="./settings.html" id="back">back</a>
@@ -57,6 +58,6 @@
   </body>
 
   <script src="./scripts/lodash.min.js"></script>
-  <script src="./scripts/setSize.js"></script>
+  <script src="./scripts/setPlayersNum.js"></script>
 
 </html>

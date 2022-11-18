@@ -1,0 +1,23 @@
+#Blue {
+    background-color: #3a35db;
+    box-shadow: none;
+    filter: saturate(0.4) blur(2px);
+}
+
+#Red {
+    background-color: #d73737;
+    box-shadow: none;
+    filter: saturate(0.4) blur(2px);
+}
+
+#Green {
+    background-color: #32b13b;
+    box-shadow: 0rem 0rem 1.5rem 0.75rem #3e8710;
+    filter: none;
+}
+
+#Yellow {
+    background-color: #a2b132;
+    box-shadow: none;
+    filter: saturate(0.4) blur(2px);
+}
