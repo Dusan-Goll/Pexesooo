@@ -1,6 +1,6 @@
 # Pexesooo  
 Browser game  
-![Pexesooo screen](./PexesoooIm.png)  
+![Pexesooo screen](./screenshot.jpg)  
 ## Purpose  
 This small project is intended for my learning purpose.
 ## Running the game
