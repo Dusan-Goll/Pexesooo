@@ -9,47 +9,6 @@
     --color-four: #5f2b57;
 }
 
-/*** SETTINGS page ***/
-/* 'back' anchor */
-#back {
-    min-height: 5rem;
-    min-width: 20rem;
-
-    background-color: rgb(227, 80, 60);
-    background-image: none;
-
-    margin-top: 1rem;
-}
-
-#back:hover,
-#back:active {
-    filter: brightness(1.4);
-    cursor: pointer;
-}
-
-/* 'game size' anchor */
-#gSize {
-    background-color: rgb(26, 211, 118);
-}
-
-#gSize:hover,
-#gSize:active {
-    filter: brightness(1.4);
-    cursor: pointer;
-}
-
-/* 'number of players' anchor */
-#numPlayers {
-    background-color: rgb(191, 223, 93);
-}
-
-#numPlayers:hover,
-#numPlayers:active {
-    filter: brightness(1.4);
-    cursor: pointer;
-}
-
-
 /*** GAME SIZE SETTINGS page ***/
 /* buttons */
 .size {

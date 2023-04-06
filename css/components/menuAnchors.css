@@ -3,19 +3,45 @@
   background-color: #e7aa38df;
 }
 
-#sett {
+#settings {
   background-color: #4b4bc0e6;
 }
 
+#back-to-menu {
+  background-color: #e3503c;
+}
+
+#grid-size {
+  background-color: #1ad376;
+}
+
+#number-of-players {
+  background-color: #bfdf5d;
+}
+
 @media only screen and (hover: hover) {
+  #start:hover, #settings:hover, #back-to-menu:hover,
+  #grid-size:hover, #number-of-players:hover {
+    background-color: transparent;
+  }
+
   #start:hover {
     color: #955d18;
-    background-color: transparent;
-    
   }
   
-  #sett:hover {
+  #settings:hover {
     color: #281867e6;
-    background-color: transparent;
+  }
+
+  #back-to-menu:hover {
+    color: #7e1e1e;
+  }
+
+  #grid-size:hover {
+    color: #287a45;
+  }
+
+  #number-of-players:hover {
+    color: #e8ffa2;
   }
 }
