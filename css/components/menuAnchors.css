@@ -1,0 +1,21 @@
+/* menu anchors */
+#start {
+  background-color: #e7aa38df;
+}
+
+#sett {
+  background-color: #4b4bc0e6;
+}
+
+@media only screen and (hover: hover) {
+  #start:hover {
+    color: #955d18;
+    background-color: transparent;
+    
+  }
+  
+  #sett:hover {
+    color: #281867e6;
+    background-color: transparent;
+  }
+}

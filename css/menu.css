@@ -1,13 +1,13 @@
 /* menu buttons */
-#start {
+/* #start {
     background-color: rgba(239, 167, 32, 0.875);
 }
 
 #sett {
     background-color: rgba(75, 75, 192, 0.903);
-}
+} */
 
-#start:hover,
+/* #start:hover,
 #start:active {
     filter: brightness(1.2);
     cursor: pointer;
@@ -17,4 +17,4 @@
 #sett:active {
     filter: brightness(1.4);
     cursor: pointer;
-}
+} */

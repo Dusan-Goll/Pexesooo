@@ -1,0 +1,10 @@
+footer {
+  min-height: 1.5rem;
+  align-self: flex-end;
+  text-align: center;
+}
+
+footer p {
+  font-size: 1rem;
+  padding: 0.5em;
+}
