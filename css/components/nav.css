@@ -17,7 +17,7 @@ nav a {
   border-radius: 12px;
   
   text-transform: uppercase;
-  letter-spacing: 0.3rem;
+  letter-spacing: 0.2rem;
   text-decoration: none;
   color: #000;
 
@@ -26,10 +26,44 @@ nav a {
   justify-content: center;
 }
 
+nav button {
+  font-size: 0.8rem;
+  height: 3.5em;
+  width: 12em;
+  margin-top: 1em;
+  letter-spacing: 0.3em;
+
+  border: 2px solid #00008b;
+  border-radius: 12px;
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-transform: uppercase;
+
+  display: flex;
+  justify-content: flex-start;
+  column-gap: 1.6em;
+  align-items: center;
+}
+
+nav button svg {
+  height: 30px;
+  width: 30px;
+}
+
+.break {
+  font-size: 0.6rem;
+  height: 2em;
+}
+
 /* :active & :hover states */
 nav a:active {
   transform: translateY(3px);
   filter: saturate(200%);
+}
+
+nav button:active {
+  transform: translatex(5px);
+  filter: grayscale(50%);
 }
 
 @media only screen and (hover: hover) {
@@ -37,17 +71,28 @@ nav a:active {
     cursor: pointer;
     border: 3px solid currentColor;
   }
+
+  nav button:hover {
+    filter: brightness(1.2);
+    cursor: pointer;
+  }
 }
 
 /* responsive layout */
 @media only screen and (max-width: 315px) {
   nav a {
     font-size: 0.8rem;
-    height: 2.5rem;
     width: 10rem;
     margin-top: 0.6rem;
     border-radius: 8px;
-    letter-spacing: 0.2rem;
+    letter-spacing: 0.1rem;
+  }
+
+  nav button {
+    width: 10em;
+    padding-right: 0.5em;
+    column-gap: 0.8em;
+    letter-spacing: 0.1em;
   }
 }
 
@@ -57,5 +102,14 @@ nav a:active {
     height: 5rem;
     width: 18rem;
     margin-top: 1rem;
+  }
+
+  nav button {
+    font-size: 1rem;
+    height: 3em;
+  }
+
+  .break {
+    font-size: 1rem;
   }
 }

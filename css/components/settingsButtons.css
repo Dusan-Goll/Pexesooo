@@ -1,0 +1,32 @@
+/* size buttons */
+#size-small {
+  background-color: var(--color-small);
+}
+
+#size-medium {
+  background-color: var(--color-medium);
+}
+
+#size-large {
+  background-color: var(--color-large);
+}
+
+/* players count buttons */
+#count2 {
+    background-color: var(--color-two);
+}
+
+#count3 {
+    background-color: var(--color-three);
+}
+
+#count4 {
+    background-color: var(--color-four);
+}
+
+@media only screen and (hover: hover) {
+  #count2:hover, #count3:hover, #count4:hover {
+    background-color: #f0ffff;
+    filter: brightness(1);
+  }
+}

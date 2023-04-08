@@ -1,14 +1,15 @@
 /* menu anchors */
+#back-to-menu {
+  background-color: #e3503c;
+  margin-top: 1.5rem;
+}
+
 #start {
   background-color: #e7aa38df;
 }
 
 #settings {
   background-color: #4b4bc0e6;
-}
-
-#back-to-menu {
-  background-color: #e3503c;
 }
 
 #grid-size {
@@ -36,11 +37,11 @@
   #back-to-menu:hover {
     color: #7e1e1e;
   }
-
+  
   #grid-size:hover {
     color: #287a45;
   }
-
+  
   #number-of-players:hover {
     color: #e8ffa2;
   }
