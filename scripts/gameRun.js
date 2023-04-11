@@ -33,7 +33,7 @@ function turnOverCard(buttonElement) {
         comparePictures(firstCard, secondCard);
     };
 
-    if (isEmptyPlayground()) {
+    if (isEmptyDesk()) {
         endGameView()
     };
 }
@@ -64,7 +64,7 @@ function enableClick(card) {
 
 // all cards except both currently turned
 function otherCards() {
-    let allCards = playground.children;
+    let allCards = desk.children;
     allCardsArray = Array.prototype.slice.call(allCards);
     return _.pull(allCardsArray, firstCard, secondCard);
 }
@@ -91,8 +91,17 @@ function comparePictures(card_1, card_2) {
 }
 
 function deleteCards() {
-    firstCard.outerHTML = "<div class='void'></div>";
-    secondCard.outerHTML = "<div class='void'></div>";
+    // for (let card of [firstCard, secondCard]) {
+        let vacant1 = document.createElement('div');
+        vacant1.setAttribute('class', 'vacant');
+        firstCard.replaceWith(vacant1);
+        vacant1.removeAttribute('onclick');
+    
+        let vacant2 = document.createElement('div');
+        vacant2.setAttribute('class', 'vacant');
+        secondCard.replaceWith(vacant2);
+        vacant2.removeAttribute('onclick');
+    // }
 }
 
 function resetCards() {
@@ -142,7 +151,7 @@ function increaseScore(player) {
 }
 
 // check if there are any cards
-function isEmptyPlayground() {
+function isEmptyDesk() {
     if (getButtonCount() == 0) {
         return true
     } else {
@@ -151,6 +160,6 @@ function isEmptyPlayground() {
 };
 
 function getButtonCount() {
-    let buttonCount = playground.getElementsByTagName('button').length;
+    let buttonCount = desk.getElementsByTagName('button').length;
     return buttonCount
 }

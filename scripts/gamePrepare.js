@@ -1,5 +1,5 @@
 // get actual setting of game size
-var sizeSetting = localStorage.getItem("sizeClass") || "medium";
+var sizeSetting = localStorage.getItem("deckSize") || "medium";
 
 // scoreBoxes Yellow & Green
 var yellowScoreBox = document.getElementById("Yellow"),
@@ -16,18 +16,20 @@ if (numberOfPlayers == 2) {
 }
 
 // grid size
+let cardsCount;
 if (sizeSetting === "small") {
-    var columnsCount = 4,
-        rowsCount    = 3;
+    // var columnsCount = 4,
+    //     rowsCount    = 3;
+    cardsCount = 12;
 } else if (sizeSetting === "medium") {
-    var columnsCount = 5,
-        rowsCount    = 4;
+    // var columnsCount = 5,
+    //     rowsCount    = 4;
+    cardsCount = 20;
 } else if (sizeSetting === "large") {
-    var columnsCount = 6,
-        rowsCount    = 5;
+    // var columnsCount = 6,
+    //     rowsCount    = 5;
+    cardsCount = 30;
 }
-
-var gridSize = columnsCount * rowsCount;
 
 // pictures supply
 var picturesPaths = [
@@ -63,7 +65,7 @@ function shufflePictures(array) {
 shufflePictures(picturesPaths);
 
 // pictures reduction according grid size
-picturesReduced = picturesPaths.slice(0, gridSize/2);
+picturesReduced = picturesPaths.slice(0, cardsCount/2);
 
 // twice the values to make couples
 function pushTwice(element, array) {
@@ -77,34 +79,35 @@ picturesReduced.forEach(path => pushTwice(path, pictures));
 // second shuffling (whole deck of cards)
 shufflePictures(pictures);
 
-// playground
-let playground = document.getElementById('PG');
+// desk
+let desk = document.getElementById('desk');
 
 // grid construction
-playground.style.gridTemplateColumns = `repeat(${columnsCount}, 1fr)`;
-playground.style.gridTemplateRows = `repeat(${rowsCount}, 1fr)`;
+// desk.style.gridTemplateColumns = `repeat(${columnsCount}, 1fr)`;
+// desk.style.gridTemplateRows = `repeat(${rowsCount}, 1fr)`;
 
-// idFragments
-const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
+// ids
+// const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'];
 let ids = [];
 
 // create places for cards with id (i => row, j => column)
-for (let i = 0; i < rowsCount; i++) {
-    for (let j = 1; j < (columnsCount + 1); j++) {
+for (let i = 0; i < cardsCount; i++) {
+    
+    let buttonElem = document.createElement('button');
+    let imgElem    = document.createElement('img');
 
-        let buttonElem = document.createElement('button');
-        let imgElem    = document.createElement('img');
-        buttonElem.setAttribute("id", `${letters[i]}${j}`);
-        buttonElem.setAttribute("onclick", "turnOverCard(this)");
-        imgElem.setAttribute("src", "");
-        imgElem.setAttribute("alt", "");
+    buttonElem.setAttribute("id", `card-${i}`);
+    buttonElem.setAttribute("onclick", "turnOverCard(this)");
 
-        buttonElem.appendChild(imgElem);
-        playground.appendChild(buttonElem);
+    imgElem.setAttribute("src", "");
+    imgElem.setAttribute("alt", "");
 
-        ids.push(`${letters[i]}${j}`);
-    }
-};
+    buttonElem.appendChild(imgElem);
+    desk.appendChild(buttonElem);
+
+    ids.push(`card-${i}`);
+    
+}
 
 // bind IDs & pictures together
 var cards = {};

@@ -1,13 +1,13 @@
 // check current setting in Local Storage 
-var gSize = getSizeClass();
+var gameSize = getGameSize();
 
-if ( ! gSize ) {
-    gSize = "medium";
-    localStorage.setItem("sizeClass", gSize);
+if ( ! gameSize ) {
+    gameSize = "medium";
+    localStorage.setItem("deckSize", gameSize);
 }
 
-function getSizeClass() {
-    return localStorage.getItem("sizeClass");
+function getGameSize() {
+    return localStorage.getItem("deckSize");
 }
 
 // buttons variables
@@ -22,7 +22,7 @@ function getActualButton() {
     for (const sizeButton of sizeButtons) {
         let iterName = getSizeNameOf(sizeButton);
 
-        if (iterName === getSizeClass()) {
+        if (iterName === getGameSize()) {
             return sizeButton;
         }
     };
@@ -32,7 +32,7 @@ function getActualButton() {
 sizeButtons.forEach(sizeButton => {
     sizeButton.addEventListener("click", function() {
         switchTo(sizeButton);
-        localStorage.setItem("sizeClass", getSizeNameOf(sizeButton));
+        localStorage.setItem("deckSize", getSizeNameOf(sizeButton));
 
         let otherButtons = _.without(sizeButtons, sizeButton);
 
