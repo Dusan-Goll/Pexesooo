@@ -76,28 +76,35 @@ aside h2 {
 
 
 /* cards */
-#desk button {
+.card {
+    background-image: repeating-linear-gradient(
+        -45deg,
+        #451da9,
+        #c38f17
+        30px
+    );
     height: 80px;
     width: 80px;
-    
-    border: solid rgb(49, 49, 107) 0.5px;
+    border: 1px solid #31316b;
     border-radius: 10px;
     margin: 3px;
 
-    background-image: repeating-linear-gradient(
-        -45deg,
-        rgb(69, 29, 169),
-        rgb(195, 143, 23)
-        30px
-    );
-
-    display: flex;
+    /* display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: center; */
 }
 
-#desk button:hover,
-#desk button:active {
+.card .card-back-visible {
+    display: block;
+    border-radius: 10px;
+}
+
+.card .card-back-hidden {
+    display: none;
+}
+
+.card:hover,
+.card:active {
     --card-brightness: 1.3;
     --card-cursor: pointer;
 
@@ -106,9 +113,9 @@ aside h2 {
     cursor: var(--card-cursor);
 }
 
-#desk img {
+/* #desk img {
     border-radius: 10px;
-}
+} */
 
 /* 'back to menu' anchor */
 #back {

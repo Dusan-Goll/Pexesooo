@@ -1,165 +1,158 @@
-// global variables
-var firstCard,
-    secondCard,
-    colors  = ["Blue", "Red", "Green", "Yellow"],
-    players = colors.slice(0, numberOfPlayers)
-    desk    = document.getElementById("desk");
+class GameRun extends GamePrepare {
+  constructor() {
+    super();
+    this.firstCard  = 'unflipped';
+    this.secondCard = 'unflipped';
+    this.colors = ["Blue", "Red", "Green", "Yellow"];
+    this.players = this.colors.slice(0, this.playersNumber);
+    this.actualPlayer = this.players[0];
 
-// who's on turn
-function actualPlayer() {
-    return players[0];
-}
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-// turning over cards
-function turnOverCard(buttonElement) {
+  activate() {
+    this.deck.forEach(card => this.addListenerTo(card));
+  }
 
-    if (firstCard === undefined) {  // (unturned)
-        firstCard = buttonElement;
-        showCardBack(firstCard);
-        disableClick(firstCard);
+  addListenerTo(card) {
+    card.addEventListener('click', this.handleClick);
+  }
 
-    } else if (secondCard === undefined) {  // (unturned)
-        secondCard = buttonElement;
-        showCardBack(secondCard);
-        enableClick(firstCard);
-        hoverShine(firstCard);
-        hoverShine(secondCard);
+  removeListenerFrom(card) {
+    card.removeEventListener('click', this.handleClick);
+  }
 
-        otherCards().forEach(anotherCard => {
-            disableClick(anotherCard);
+  handleClick(e) {
+    this.flip(e.target);
+  }
+
+  flip(card) {
+    if (this.firstCard === 'unflipped') {
+        this.firstCard = card;
+        this.showCardBack(this.firstCard);
+        this.disableClick(this.firstCard);
+    } else if (this.secondCard === 'unflipped') {
+        this.secondCard = card;
+        this.showCardBack(this.secondCard);
+        this.enableClick(this.firstCard);
+        this.shine(this.firstCard);
+        this.shine(this.secondCard);
+
+        this.otherCards().forEach(anotherCard => {
+            this.disableClick(anotherCard);
         });
-
-    } else {  // both cards turned
-        comparePictures(firstCard, secondCard);
+    } else {  // both cards flipped
+        this.compare(this.firstCard, this.secondCard);
     };
 
-    if (isEmptyDesk()) {
-        endGameView()
+    if (this.isEmptyDesk()) {
+        this.endGameView()
     };
-}
+  }
 
-// showing card back/front & disabling/enabling click
-function showCardBack(card) {
-    let cardImg = card.firstElementChild;
-    cardImg.setAttribute("src", cards[card.id]);
-}
+  showCardBack(card) {
+    card.querySelector('img').setAttribute('class', 'card-back-visible');
+  }
 
-function showCardFront(card) {
-    card.firstElementChild.setAttribute("src", "");
-}
+  showCardFront(card) {
+    card.querySelector('img').setAttribute('class', 'card-back-hidden');
+  }
 
-function disableClick(card) {
-    card.setAttribute("onclick", "");
-    card.style.cursor = "default";
-    card.style.setProperty("--card-brightness", "1");
-    card.style.setProperty("--card-cursor", "default");
-}
+  disableClick(card) {
+    this.removeListenerFrom(card);
+  }
 
-function enableClick(card) {
-    card.setAttribute("onclick", "turnOverCard(this)");
-    card.style.cursor = "pointer";
-    card.style.setProperty('--card-brightness', "1.3");
-    card.style.setProperty("--card-cursor", "pointer");
-}
+  enableClick(card) {
+    this.addListenerTo(card);
+  }
 
-// all cards except both currently turned
-function otherCards() {
-    let allCards = desk.children;
-    allCardsArray = Array.prototype.slice.call(allCards);
-    return _.pull(allCardsArray, firstCard, secondCard);
-}
+  shine(card) {
+    card.querySelector('img').setAttribute("class", "card-back-visible shining");
+  }
 
-// handling attempt result
-function comparePictures(card_1, card_2) {
-    let firstSource  = card_1.firstElementChild.getAttribute("src");
-    let secondSource = card_2.firstElementChild.getAttribute("src");
+  otherCards() {
+    let allCards = Array.prototype.slice.call(this.deck);
+    let filteredCards = allCards.filter(card => (
+      card !== this.firstCard && card !== this.secondCard
+    ));
+    return filteredCards;
+  }
 
-    if (firstSource == secondSource) {  // cards are the same
-        deleteCards();
-        increaseScore(actualPlayer());
+  compare(card_1, card_2) {
+    let picture_1 = card_1.querySelector('img').getAttribute("src");
+    let picture_2 = card_2.querySelector('img').getAttribute("src");
+
+    if (picture_1 == picture_2) {
+        this.discard();
+        this.increaseScoreTo(this.actualPlayer);
 
     } else {  // cards are different
-        resetCards();
-        nextPlayer();
+        this.flipBack();
+        this.nextPlayer();
     }
 
-    otherCards().forEach(anotherCard => {
-        enableClick(anotherCard);
+    this.otherCards().forEach(anotherCard => {
+        this.enableClick(anotherCard);
     });
 
-    firstCard = secondCard = undefined;
-}
+    this.firstCard = this.secondCard = 'unflipped';
+  }
 
-function deleteCards() {
-    // for (let card of [firstCard, secondCard]) {
-        let vacant1 = document.createElement('div');
-        vacant1.setAttribute('class', 'vacant');
-        firstCard.replaceWith(vacant1);
-        vacant1.removeAttribute('onclick');
+  discard() {
+    this.deck = this.otherCards();
+    this.vacantize(this.firstCard);
+    this.vacantize(this.secondCard);
+  }
+
+  vacantize(card) {
+    let vacant = document.createElement('div');
+    vacant.setAttribute('class', 'vacant');
+    card.replaceWith(vacant);
+  }
+
+  increaseScoreTo(player) {
+    let playerScoreBox = this.scoreBoxes.find(scoreBox => (
+      scoreBox.id === player
+    ));
+    let scoreRow = playerScoreBox.querySelector('p'),
+        score = Number(scoreRow.textContent);
     
-        let vacant2 = document.createElement('div');
-        vacant2.setAttribute('class', 'vacant');
-        secondCard.replaceWith(vacant2);
-        vacant2.removeAttribute('onclick');
-    // }
-}
+    score += 1;
+    scoreRow.textContent = score;
+  }
 
-function resetCards() {
-    showCardFront(firstCard);
-    showCardFront(secondCard);
-    deactivateHoverShine(firstCard);
-    deactivateHoverShine(secondCard);
-}
+  flipBack() {
+    this.showCardFront(this.firstCard);
+    this.showCardFront(this.secondCard);
+  }
 
-// switching player and scoreboxes
-function nextPlayer() {
-    players.push(players.shift());
-    switchTo(actualPlayer());
-}
+  nextPlayer() {
+    let actualIndex = this.players.indexOf(this.actualPlayer);
 
-function switchTo(player) {
+    if (actualIndex < (this.players.length - 1)) {
+      this.actualPlayer = this.players[actualIndex + 1];
+    } else {
+      this.actualPlayer = this.players[0];
+    }
+    
+    this.switchScoreBoxTo(this.actualPlayer);
+  }
+
+  switchScoreBoxTo(player) {
     let scoreBarCSSLink = document.getElementById("scoreBarCSS");
     scoreBarCSSLink.setAttribute("href", `./css/highlight${player}.css`);
+  }
+
+  isEmptyDesk() {
+    return this.cardsOnTheDesk() == 0;
+  }
+
+  cardsOnTheDesk() {
+    return this.desk.getElementsByClassName('card').length;
+  }
 }
 
-// the two turned cards shining when hovering
-function hoverShine(card) {
-    card.setAttribute("onmouseover", "bright(this)");
-    card.setAttribute("onmouseleave", "debright(this)");
-}
+let game = new GameRun();
 
-function deactivateHoverShine(card) {
-    card.removeAttribute("onmouseover");
-    card.removeAttribute("onmouseleave");
-    card.removeAttribute("style");
-}
-
-function bright(hoveredButton) {
-    hoveredButton.setAttribute("style", "filter: brightness(1.25)");
-}
-
-function debright(hoveredButton) {
-    hoveredButton.setAttribute("style", "filter: brightness(1)");
-}
-
-// score handling
-function increaseScore(player) {
-    let scoreElem = document.getElementById(player).lastElementChild,
-        scoreNum  = Number(scoreElem.textContent);
-    scoreNum += 1;
-    scoreElem.textContent = scoreNum;
-}
-
-// check if there are any cards
-function isEmptyDesk() {
-    if (getButtonCount() == 0) {
-        return true
-    } else {
-        return false
-    };
-};
-
-function getButtonCount() {
-    let buttonCount = desk.getElementsByTagName('button').length;
-    return buttonCount
-}
+game.prepare();
+game.activate();
