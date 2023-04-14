@@ -1,4 +1,4 @@
-class GameRun extends GamePrepare {
+class GameRun extends GameEnd {
   constructor() {
     super();
     this.firstCard  = 'unflipped';
@@ -46,7 +46,7 @@ class GameRun extends GamePrepare {
     };
 
     if (this.isEmptyDesk()) {
-        this.endGameView()
+        this.gameEnding()
     };
   }
 
@@ -139,8 +139,17 @@ class GameRun extends GamePrepare {
   }
 
   switchScoreBoxTo(player) {
-    let scoreBarCSSLink = document.getElementById("scoreBarCSS");
-    scoreBarCSSLink.setAttribute("href", `./css/highlight${player}.css`);
+    let playerScoreBox = this.scoreBoxes.find(scoreBox => (
+      scoreBox.id === player
+    ));
+    playerScoreBox.setAttribute('class', 'score-box playing');
+
+    let otherScoreBoxes = this.scoreBoxes.filter(scoreBox => (
+      scoreBox.id !== player
+    ));
+    otherScoreBoxes.forEach(scoreBox => (
+      scoreBox.setAttribute('class', 'score-box not-playing')
+    ));
   }
 
   isEmptyDesk() {

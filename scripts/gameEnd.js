@@ -1,83 +1,91 @@
-function endGameView() {
-    removeSectionEl();
-    gameResult();
-    highlightWinners();
-    desaturateLosers();
-    addExitButton();
-};
+class GameEnd extends GamePrepare {
+  constructor() {
+    super();
+    this.main = document.querySelector('main');
+    this.stats;
+    this.maxScore;
+    this.winners;
+    this.losers;
+  }
 
-function removeSectionEl() {
-    let section = document.querySelector("section");
-    section.remove();
-}
+  gameEnding() {
+    this.removeVacants();
+    this.getStats();
+    this.getMaxScore();
+    this.getWinnersAndLosers();
+    this.showGameResult();
+    this.highlightWinners();
+    this.addExitButton();
+  }
 
-function getScoreBoxes() {
-    let scoreBoxes = document.getElementsByClassName("scoreBox");
-    return Array.prototype.slice.call(scoreBoxes);
-}
+  removeVacants() {
+    let vacants = this.desk.querySelectorAll('.vacant');
+    vacants.forEach(vacant => vacant.remove());
+  }
 
-function winningPlayers() {
-    let stats = Object();
+  
+  getStats() {
+    this.stats = Array();
     
-    for (const scoreBox of getScoreBoxes()) {
-        let playerColor = scoreBox.getAttribute("id"),
-            playerScore = Number(scoreBox.lastElementChild.textContent);
-        stats[playerColor] = playerScore;
-    }
+    this.scoreBoxes.forEach(scoreBox => {
+      let detail = {
+        node: scoreBox,
+        name: scoreBox.id,
+        score: scoreBox.querySelector('.score').textContent,
+      }
+      this.stats.push(detail);
+    });
+  }
 
-    const bestScore = Math.max(...Object.values(stats));
-    const players = Object.keys(stats);
-    return players.filter(player => stats[player] === bestScore);
-}
+  getMaxScore() {
+    this.maxScore = Math.max(...this.stats.map(detail => detail.score));
+  }
 
-function gameResult() {
-    let winners    = winningPlayers(),
-        resultElem = document.createElement("p");
+  getWinnersAndLosers() {
+    this.winners = this.stats.filter(detail => (
+      detail.score == this.maxScore
+    ));
+    this.losers = this.stats.filter(detail => (
+      detail.score != this.maxScore
+    ));
+  }
+
+  showGameResult() {
+    let result = document.createElement("p");
+    result.setAttribute('class', 'result');
     
-    if (winners.length === 1) {
-        resultElem.textContent = `Player ${winners} won.`;
+    if (this.winners.length === 1) {
+      result.textContent = `Player ${this.winners[0].name} won.`;
     } else {
-        resultElem.textContent = `Players ${winners.join(" & ")} won.`;
+      let names = this.winners.map(detail => (
+        detail.name
+      ));
+
+      result.textContent = `Players ${names.join(' & ')} won.`;
     }
     
-    desk.appendChild(resultElem);
-}
+    this.desk.appendChild(result);
+  }
 
-function winScoreBoxes() {
-    let thoseWhoWon = Array();
-    winningPlayers().forEach(player => {
-        let scoreBox = document.getElementById(player);
-        thoseWhoWon.push(scoreBox);
+  highlightWinners() {
+    this.winners.forEach(detail => {
+      detail.node.setAttribute('class', 'score-box winner');
     });
-    return thoseWhoWon;
-}
 
-function loseScoreBoxes() {
-    return _.difference(getScoreBoxes(), winScoreBoxes());
-}
-
-function highlightWinners() {
-    winScoreBoxes().forEach(scoreBox => {
-    scoreBox.style.filter = "brightness(1.3)";
-    scoreBox.style.boxShadow = "0rem 0rem 3rem 1.5rem rgb(185, 157, 86)";
-    })
-}
-    
-function desaturateLosers() {
-    loseScoreBoxes().forEach(scoreBox => {
-        scoreBox.style.filter = "saturate(0.1)";
-        scoreBox.style.boxShadow = "none";
+    this.losers.forEach(detail => {
+      detail.node.setAttribute('class', 'score-box loser');
     });
-}
+  }
 
-function addExitButton() {
+  addExitButton() {
     let exitAnchor = document.createElement("a"),
         navElem    = document.createElement("nav");
 
     exitAnchor.textContent = "back to menu";
     exitAnchor.setAttribute("href", "./index.html");
-    exitAnchor.setAttribute("id", "back");
+    exitAnchor.setAttribute("id", "back-to-menu");
 
     navElem.appendChild(exitAnchor);
-    desk.appendChild(navElem);
+    this.desk.appendChild(navElem);
+  }
 }

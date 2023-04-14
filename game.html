@@ -10,15 +10,17 @@
             
       <link rel="stylesheet" href="./css/common.css">
       
-      <link id="scoreBarCSS" rel="stylesheet" href="./css/highlightBlue.css">
-
       <link rel="stylesheet" href="./css/base.css">
       <link rel="stylesheet" href="./css/components/header.css">
       <link rel="stylesheet" href="./css/components/main.css">
       <link rel="stylesheet" href="./css/components/footer.css">
       <link rel="stylesheet" href="./css/components/nav.css">
       <link rel="stylesheet" href="./css/components/menuAnchors.css">
-      <link rel="stylesheet" href="./css/game.css">
+      
+      <link rel="stylesheet" href="./css/components/desk.css">
+      <link rel="stylesheet" href="./css/components/scoreBar.css">
+      <link rel="stylesheet" href="./css/components/card.css">
+
       <title>Pexesooo - game</title>
   </head>
   
@@ -28,27 +30,27 @@
       </header>
 
       <main class="section">
-        <aside>
+        <aside class="score-bar">
           <h2>Players score</h2>
          
-          <div class="score-box" id="Blue">
+          <div class="score-box playing" id="Blue">
             <h3>Blue</h3>
-            <p>0</p>
+            <p class="score">0</p>
           </div>
 
-          <div class="score-box" id="Red">
+          <div class="score-box not-playing" id="Red">
             <h3>Red</h3>
-            <p>0</p>
+            <p class="score">0</p>
           </div>
 
-          <div class="score-box" id="Green">
+          <div class="score-box not-playing" id="Green">
             <h3>Green</h3>
-            <p>0</p>
+            <p class="score">0</p>
           </div>
 
-          <div class="score-box" id="Yellow">
+          <div class="score-box not-playing" id="Yellow">
             <h3>Yellow</h3>
-            <p>0</p>
+            <p class="score">0</p>
           </div>
         </aside>
 
@@ -62,10 +64,6 @@
 
     <script src="./scripts/picturesPaths.js"></script>
     <script src="./scripts/gamePrepare.js"></script>
-    <script src="./scripts/gameRun.js"></script>
-
-
-    <!-- <script src="./scripts/lodash.min.js"></script>
     <script src="./scripts/gameEnd.js"></script>
-     -->
+    <script src="./scripts/gameRun.js"></script>
 </html>
