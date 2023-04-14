@@ -1,0 +1,90 @@
+.score-bar {
+  background-color: #6a69a084;
+  width: 15%;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  border-radius: 1rem;
+  
+  align-self: stretch;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.score-bar h2 {
+  margin: 0.5rem;
+  margin-bottom: 1rem;
+  color: #181563;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+}
+
+/* specific score-boxes */
+#Blue {
+  background-color: #3a35db;
+  color: #3a35db;
+}
+
+#Red {
+  background-color: #d73737;
+  color: #d73737;
+}
+
+#Green {
+  background-color: #32b13b;
+  color: #32b13b;
+}
+
+#Yellow {
+  background-color: #a2b132;
+  color: #a2b132;
+}
+
+/* general score-box styles */
+.score-box {
+  border-radius: 0.5rem;
+  margin: 0.5rem 1rem;
+}
+
+.score-box h3 {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  color: #090957;
+  margin: 0.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.score-box .score {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  color: #dbae27;
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+#Yellow .score {
+  color: #886c1a;
+}
+
+/* score-box states */
+.playing {
+  box-shadow: 0 0 15px 10px currentColor;
+}
+
+.not-playing {
+  filter: saturate(0.4) blur(2px);
+}
+
+.winner {
+  filter: brightness(1.3);
+  box-shadow: 0 0 15px 15px #b99d56;
+}
+
+.score-box.loser {
+  filter: saturate(0.1);
+}
+
