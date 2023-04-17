@@ -7,7 +7,6 @@ main {
   width: 85%;
   text-transform: uppercase;
   margin-right: 1rem;
-  border: 1px solid #181563;
 
   display: flex;
   flex-wrap: wrap;
@@ -27,12 +26,35 @@ nav {
 .result {
   color: #00008b;
   font-size: 2.5rem;
-  margin-left: 4rem;
-  margin-right: 4rem;
-  margin-bottom: 4rem;
-  padding: 1.5rem;
-  box-shadow: 0rem 0rem 3rem 1.5rem #b99d56;
+  margin: 1em;
+  padding: 1em;
+  box-shadow: 0 0 10px 10px #b99d56;
 
   background-color: #b99d56;
-  border-radius: 2rem;
+  border-radius: 2em;
+}
+
+/* responsive layout */
+@media only screen and (max-width: 650px) {
+  #desk {
+    column-gap: 6px;
+    row-gap: 6px;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  #desk {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  #desk {
+    column-gap: 3px;
+    row-gap: 3px;
+  }
+
+  .result {
+    font-size: 1.5rem;
+  }
 }

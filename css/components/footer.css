@@ -2,9 +2,16 @@ footer {
   min-height: 1.5rem;
   align-self: flex-end;
   text-align: center;
+  padding-top: 20%;
 }
 
 footer p {
   font-size: 1rem;
   padding: 0.5em;
+}
+
+@media only screen and (max-width: 450px) {
+  footer {
+    align-self: flex-end;
+  }
 }

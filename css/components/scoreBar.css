@@ -1,9 +1,10 @@
 .score-bar {
   background-color: #6a69a084;
   width: 15%;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  border-radius: 1rem;
+  font-size: 1rem;
+  margin-left: 1em;
+  margin-right: 1em;
+  border-radius: 1em;
   
   align-self: stretch;
 
@@ -13,10 +14,10 @@
 }
 
 .score-bar h2 {
-  margin: 0.5rem;
-  margin-bottom: 1rem;
   color: #181563;
   font-size: 1.3rem;
+  margin: 0.5em;
+  margin-bottom: 1em;
   text-transform: uppercase;
 }
 
@@ -43,26 +44,27 @@
 
 /* general score-box styles */
 .score-box {
-  border-radius: 0.5rem;
-  margin: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 0.5em;
+  margin: 0.5em 1em;
 }
 
 .score-box h3 {
-  font-family: inherit;
+  color: #090957;
   font-size: 1rem;
+  margin: 0.5em;
+  margin-bottom: 0.2em;
   font-weight: bold;
+  font-family: inherit;
   text-transform: uppercase;
   text-align: center;
-  color: #090957;
-  margin: 0.5rem;
-  margin-bottom: 0.2rem;
 }
 
 .score-box .score {
-  margin-top: 0.2rem;
-  margin-bottom: 0.2rem;
   color: #dbae27;
   font-size: 2.5rem;
+  margin-top: 0.2em;
+  margin-bottom: 0.2em;
   text-align: center;
 }
 
@@ -76,7 +78,7 @@
 }
 
 .not-playing {
-  filter: saturate(0.4) blur(2px);
+  filter: saturate(0.4) blur(1.5px);
 }
 
 .winner {
@@ -88,3 +90,36 @@
   filter: saturate(0.1);
 }
 
+/* responsive layout */
+@media only screen and (max-width: 650px) {
+  .score-bar, .score-box {
+    font-size: 0.6rem;
+  }
+
+  .score-bar h2 {
+    font-size: 1rem;
+  }
+
+  .score-box h3 {
+    font-size: 0.8rem;
+    margin: 0.3em;
+  }
+
+  .score-box .score {
+    font-size: 1.8rem;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  .score-bar {
+    width: 20%;
+  }
+
+  .score-bar h2 {
+    font-size: 0.8rem;
+  }
+
+  .score-box {
+    margin: 0.5em 0.4em;
+  }
+}

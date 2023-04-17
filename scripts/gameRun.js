@@ -60,10 +60,12 @@ class GameRun extends GameEnd {
 
   disableClick(card) {
     this.removeListenerFrom(card);
+    card.setAttribute('class', 'card not-clickable');
   }
 
   enableClick(card) {
     this.addListenerTo(card);
+    card.setAttribute('class', 'card');
   }
 
   shine(card) {
