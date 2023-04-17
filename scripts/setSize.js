@@ -1,63 +1,71 @@
-// check current setting in Local Storage 
-var gameSize = getGameSize();
+class SizeSetter {
+  constructor() {
+    this.actualSize;
+    this.actualButton;
+    this.sizeButtons = Array.from(document.getElementsByClassName("size"));
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-if ( ! gameSize ) {
-    gameSize = "medium";
-    localStorage.setItem("deckSize", gameSize);
+  run() {
+    this.setActualSize();
+    this.setActualButton();
+    this.switchTo(this.actualButton);
+    this.activateButtons();
+  }
+
+  setActualSize() {
+    let valueFromStorage = localStorage.getItem("deckSize");
+
+    if (valueFromStorage) {
+      this.actualSize = valueFromStorage;
+    } else {
+      let defaultValue = 'medium';
+      this.actualSize = defaultValue;
+      localStorage.setItem('deckSize', defaultValue);
+    }
+  }
+
+  setActualButton() {
+    this.actualButton = this.sizeButtons.find(button => (
+      button.name === this.actualSize
+    ));
+  }
+
+  switchTo(button) {
+    this.getInnerCircle(button).setAttribute("fill", "var(--color-switchedOn)");
+  }
+
+  switchOff(button, colorName) {
+    this.getInnerCircle(button).setAttribute("fill", `var(--color-${colorName})`);
+  }
+
+  getInnerCircle(button) {
+    return button.querySelector('.inner');
+  }
+
+  activateButtons() {
+    this.sizeButtons.forEach(button => {
+      button.addEventListener("click", this.handleClick);
+    });
+  }
+
+  handleClick(e) {
+    this.actualButton = e.currentTarget;
+    this.switchTo(this.actualButton);
+    this.actualSize = this.actualButton.name;
+    localStorage.setItem("deckSize", this.actualSize);
+  
+    let otherButtons = this.sizeButtons.filter(otherButton => (
+      otherButton !== this.actualButton
+    ));
+
+    otherButtons.forEach(otherButton => {
+      let sizeName = otherButton.name;
+      this.switchOff(otherButton, sizeName);
+    });
+  }
 }
 
-function getGameSize() {
-    return localStorage.getItem("deckSize");
-}
+let sizeSetter = new SizeSetter();
 
-// buttons variables
-var sizeButtonsList = document.getElementsByClassName("size"),
-    sizeButtons = Array.prototype.slice.call(sizeButtonsList);
-
-// actual size setting
-let actualButton = getActualButton();
-switchTo(actualButton);
-
-function getActualButton() {
-    for (const sizeButton of sizeButtons) {
-        let iterName = getSizeNameOf(sizeButton);
-
-        if (iterName === getGameSize()) {
-            return sizeButton;
-        }
-    };
-}
-
-// switching buttons
-sizeButtons.forEach(sizeButton => {
-    sizeButton.addEventListener("click", function() {
-        switchTo(sizeButton);
-        localStorage.setItem("deckSize", getSizeNameOf(sizeButton));
-
-        let otherButtons = sizeButtons.filter(button => (
-            button !== sizeButton
-        ));
-
-        otherButtons.forEach(otherButton => {
-            let sizeName = getSizeNameOf(otherButton);
-            switchOff(otherButton, sizeName);
-        });
-    })
-});
-
-function switchTo(thisButton) {
-    getInnerCircle(thisButton).setAttribute("fill", "var(--color-switchedOn)");
-}
-
-function switchOff(thisButton, colorName) {
-    getInnerCircle(thisButton).setAttribute("fill", `var(--color-${colorName})`);
-}
-
-function getInnerCircle(_thisButton) {
-    let svgElem = _thisButton.firstElementChild;
-    return svgElem.firstElementChild.nextElementSibling;
-}
-
-function getSizeNameOf(thisButton) {
-    return thisButton.lastElementChild.textContent;
-}
+sizeSetter.run();
