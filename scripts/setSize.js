@@ -34,7 +34,9 @@ sizeButtons.forEach(sizeButton => {
         switchTo(sizeButton);
         localStorage.setItem("deckSize", getSizeNameOf(sizeButton));
 
-        let otherButtons = _.without(sizeButtons, sizeButton);
+        let otherButtons = sizeButtons.filter(button => (
+            button !== sizeButton
+        ));
 
         otherButtons.forEach(otherButton => {
             let sizeName = getSizeNameOf(otherButton);
