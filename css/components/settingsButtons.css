@@ -13,15 +13,15 @@
 
 /* players count buttons */
 #count2 {
-    background-color: var(--color-two);
+    background-color: var(--color-2);
 }
 
 #count3 {
-    background-color: var(--color-three);
+    background-color: var(--color-3);
 }
 
 #count4 {
-    background-color: var(--color-four);
+    background-color: var(--color-4);
 }
 
 @media only screen and (hover: hover) {
