@@ -40,3 +40,10 @@ header h1 {
     letter-spacing: 1rem;
   }
 }
+
+@media only screen and (max-width: 450px) {
+  .section {
+    align-self: center;
+    width: 95%;
+  }
+}
