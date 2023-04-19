@@ -96,8 +96,8 @@
   .card-back-hidden,
   .card-back-visible,
   .vacant {
-    height: 45px;
-    width: 45px;
+    height: 50px;
+    width: 50px;
     border-radius: 7px;
   }
 }

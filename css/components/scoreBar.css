@@ -10,7 +10,7 @@
 
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 .score-bar h2 {
@@ -19,6 +19,14 @@
   margin: 0.5em;
   margin-bottom: 1em;
   text-transform: uppercase;
+  height: 10%;
+}
+
+#score-boxes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 80%;
 }
 
 /* specific score-boxes */
@@ -110,7 +118,7 @@
   }
 }
 
-@media only screen and (max-width: 530px) {
+@media only screen and (min-width: 450px) and (max-width: 530px) {
   .score-bar {
     width: 20%;
   }
@@ -121,5 +129,32 @@
 
   .score-box {
     margin: 0.5em 0.4em;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .score-bar {
+    width: 95%;
+    margin-bottom: 0.5rem;
+  }
+
+  .score-bar h2 {
+    text-align: center;
+    margin: 0.3rem;
+  }
+
+  #score-boxes {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .score-box {
+    width: 25%;
+  }
+
+  .score-box .score {
+    font-size: 1.3rem;
+    font-weight: bold;
+    line-height: 1.3rem;
   }
 }
