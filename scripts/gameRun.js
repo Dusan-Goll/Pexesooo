@@ -4,13 +4,16 @@ class GameRun extends GameEnd {
     this.firstCard  = 'unflipped';
     this.secondCard = 'unflipped';
     this.colors = ["Blue", "Red", "Green", "Yellow"];
-    this.players = this.colors.slice(0, this.playersNumber);
-    this.actualPlayer = this.players[0];
+    this.players;
+    this.actualPlayer;
 
     this.handleClick = this.handleClick.bind(this);
   }
 
   activate() {
+    this.players = this.colors.slice(0, Number(this.playersNumber));
+    this.actualPlayer = this.players[0];
+    
     this.deck.forEach(card => this.addListenerTo(card));
   }
 

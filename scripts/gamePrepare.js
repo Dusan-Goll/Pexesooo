@@ -1,17 +1,37 @@
 class GamePrepare {
   constructor() {
     this.desk = document.getElementById('desk');
-    this.sizeSetting = localStorage.getItem('deckSize') || medium;
-    this.playersNumber = localStorage.getItem('numOfPlayers') || 2;
+    this.sizeSetting;
+    this.playersNumber;
     this.pictures = picturesPaths;
     this.scoreBoxes;
     this.deck;
   }
 
   prepare() {
+    this.gameSettings();
     this.reducePlayers();
     this.preparePictures();
     this.createDeck();
+  }
+
+  gameSettings() {
+    let deckSize = localStorage.getItem('deckSize');
+    let playersNum = localStorage.getItem('numOfPlayers');
+    
+    if (deckSize) {
+      this.sizeSetting = deckSize;
+    } else {
+      localStorage.setItem('deckSize', 'medium');
+      this.sizeSetting = localStorage.getItem('deckSize');
+    }
+    
+    if (playersNum) {
+      this.playersNumber = playersNum;
+    } else {
+      localStorage.setItem('numOfPlayers', 2);
+      this.playersNumber = localStorage.getItem('numOfPlayers');
+    }
   }
 
   reducePlayers() {
